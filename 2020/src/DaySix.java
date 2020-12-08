@@ -1,3 +1,5 @@
+package technology.ingram.adventofcode.daysix;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -5,9 +7,10 @@ import java.util.HashSet;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
+import technology.ingram.adventofcode.Utils;
 
 class DaySix{
-    private static final String inputFile = "input.txt";
+    private static final String inputFile = "inputs/daySix.txt";
     private static final int numberOfRows = 2248;
 
     public static void main(String args[]){
@@ -17,7 +20,7 @@ class DaySix{
         if(!(args[0].equals("1") || args[0].equals("2"))){
             throw new IllegalArgumentException("Input must be 1 or 2. Usage:\n\tTo run challenge 1: java DayThree 1\n\tTo run challenge 2: java DayThree 2");
         }
-        String[] inputRows = readFile(numberOfRows, inputFile);
+        String[] inputRows = Utils.readFile(numberOfRows, inputFile);
         answer = challenge == 1 ? sumUniqueYesAnswers(inputRows) : sumAllAnsweredQuestions(inputRows);
         System.out.println("Sum of unique answers: " + answer);
         long endTime = System.nanoTime();
@@ -25,23 +28,6 @@ class DaySix{
         System.out.println("Found in: " + totalTimeToRunMS + "ms");
     }
     
-    public static String[] readFile(int numberOfRows, String fileName){
-        String[] inputRows = new String[numberOfRows];
-        try{
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
-            int counter = 0;
-            while(counter < inputRows.length){
-                String line = br.readLine();
-                inputRows[counter] = line;
-                counter++;
-            }
-            br.close();
-        }catch(IOException err){
-            System.out.println(err);
-        }
-        return inputRows;
-    }
-
     public static int sumUniqueYesAnswers(String[] inputRows){
         int answer = 0;
         String customsFormAnswers = "";

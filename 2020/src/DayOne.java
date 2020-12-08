@@ -1,3 +1,5 @@
+package technology.ingram.adventofcode.dayone;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -18,7 +20,7 @@ class DayOne{
         ArrayList<Integer> smallerThanComposite = new ArrayList<Integer>();
 
         try{
-            br = new BufferedReader(new FileReader("input.txt"));
+            br = new BufferedReader(new FileReader("inputs/dayOne.txt"));
         }catch(IOException err){
             System.out.println(err);
         }

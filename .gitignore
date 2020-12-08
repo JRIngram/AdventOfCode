@@ -1,2 +1,3 @@
 *.class
 **/.vscode
+/2020/src/technology/ingram/adventofcode

@@ -1,12 +1,15 @@
+package technology.ingram.adventofcode.dayeight;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Arrays;
+import technology.ingram.adventofcode.Utils;
 
 public class DayEight {
-    private static final String inputFile = "input.txt";
+    private static final String inputFile = "inputs/dayEight.txt";
     private static final int numberOfRows = 647;
     private static int challenge;
     public static void main(String args[]){
@@ -16,29 +19,12 @@ public class DayEight {
             throw new IllegalArgumentException("Input must be 1 or 2. Usage:\n\tTo run challenge 1: java DayThree 1\n\tTo run challenge 2: java DayThree 2");
         }
         int answer = 0;
-        String[] inputRows = readFile(numberOfRows, inputFile);
+        String[] inputRows = Utils.readFile(numberOfRows, inputFile);
         answer = challenge == 1 ? challengeOne(inputRows) : challengeTwo(inputRows);
         long endTime = System.nanoTime();
         double totalTimeToRunMS = (endTime - startTime) / 1000000.0;
         System.out.println("Answer: " + answer);
         System.out.println("Found in: " + totalTimeToRunMS + "ms");
-    }
-
-    public static String[] readFile(int numberOfRows, String fileName){
-        String[] inputRows = new String[numberOfRows];
-        try{
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
-            int counter = 0;
-            while(counter < inputRows.length){
-                String line = br.readLine();
-                inputRows[counter] = line;
-                counter++;
-            }
-            br.close();
-        }catch(IOException err){
-            System.out.println(err);
-        }
-        return inputRows;
     }
 
     public static int challengeOne(String[] inputRows){
@@ -56,7 +42,6 @@ public class DayEight {
                 instructionToRun = commandResult[1];
             }
             else{
-                System.out.println("INFINITE LOOP DETECTED");
                 break;
             }
         }
@@ -115,7 +100,6 @@ public class DayEight {
         String[] splitCommand = command.split(" ");
         String commandInstruction = splitCommand[0];
         int parsedCommandValue = Integer.parseInt((splitCommand[1]));
-        System.out.println("\t" + command);
         switch (commandInstruction){
             case "nop":
                 nextInstructionToRun += 1;

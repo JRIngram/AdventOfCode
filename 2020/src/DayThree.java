@@ -1,6 +1,9 @@
+package technology.ingram.adventofcode.daythree;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import technology.ingram.adventofcode.Utils;
 
 class DayThree{
     public static void main(String args[]){
@@ -9,12 +12,12 @@ class DayThree{
         if(!(args[0].equals("1") || args[0].equals("2"))){
             throw new IllegalArgumentException("Input must be 1 or 2. Usage:\n\tTo run challenge 1: java DayThree 1\n\tTo run challenge 2: java DayThree 2");
         }
-        String inputFile = "input.txt";
+        String inputFile = "inputs/dayThree.txt";
         int numberOfRows = 323;
         String[] inputRows = new String[numberOfRows];
         long answer = 0;
 
-        inputRows = readFile(numberOfRows, inputFile);
+        inputRows = Utils.readFile(numberOfRows, inputFile);
         if(challenge == 1){
             answer = calculateTreesHit(inputRows, 3, 1);
             System.out.println("Trees hit: " + answer);
@@ -31,23 +34,6 @@ class DayThree{
         long endTime = System.nanoTime();
         double totalTimeToRunMS = (endTime - startTime) / 1000000.0;
         System.out.println("Found in: " + totalTimeToRunMS + "ms");
-    }
-
-    public static String[] readFile(int numberOfRows, String fileName){
-        String[] inputRows = new String[numberOfRows];
-        try{
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
-            int counter = 0;
-            while(counter < inputRows.length){
-                String line = br.readLine();
-                inputRows[counter] = line;
-                counter++;
-            }
-            br.close();
-        }catch(IOException err){
-            System.out.println(err);
-        }
-        return inputRows;
     }
 
     public static int calculateTreesHit(String[] inputRows, int spacesRight, int spacesDown){

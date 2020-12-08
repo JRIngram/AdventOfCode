@@ -1,12 +1,15 @@
+package technology.ingram.adventofcode.dayfive;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
+import technology.ingram.adventofcode.Utils;
 
 class DayFive{
     private static final int SEATING_ROWS = 128; // Numbered 0 - 127
     private static final int SEATING_COLUMNS = 8; // Numbered 0 - 7
-    private static final String inputFile = "input.txt";
+    private static final String inputFile = "inputs/dayFive.txt";
     private static final int numberOfRows = 826;
 
     public static void main(String args[]){
@@ -17,7 +20,7 @@ class DayFive{
         }
         String[] inputRows = new String[numberOfRows];
         int answer = 0;
-        inputRows = readFile(numberOfRows, inputFile);
+        inputRows = Utils.readFile(numberOfRows, inputFile);
         Integer[] seatIds = new Integer[inputRows.length];
         for(int i = 0; i < inputRows.length; i++){
             int row = calculateSeatRow(inputRows[i]);
@@ -89,42 +92,4 @@ class DayFive{
         }
         return column;        
     }
-
-    public static String[] readFile(int numberOfRows, String fileName){
-        String[] inputRows = new String[numberOfRows];
-        try{
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
-            int counter = 0;
-            while(counter < inputRows.length){
-                String line = br.readLine();
-                inputRows[counter] = line;
-                counter++;
-            }
-            br.close();
-        }catch(IOException err){
-            System.out.println(err);
-        }
-        return inputRows;
-    }
-    
-    // public static Integer[] sortSeatIds(Integer[] seatIds){
-    //     // Implements Gnome Sort
-    //     // https://en.wikipedia.org/wiki/Gnome_sort
-    //     // Chosen for curiosity sake, never heard of it before.
-    //     // Not the speediest algorithm. Should implemented QuickSort if I want speed.
-    //     int position = 0;
-    //     while(position < seatIds.length){
-    //         if(position == 0 || seatIds[position] >= seatIds[position - 1]){
-    //             System.out.println("ping");
-    //             position++;
-    //         }
-    //         else{
-    //             System.out.println("pong");
-    //             int temp = seatIds[position];
-    //             seatIds[position] = seatIds[position - 1];
-    //             seatIds[position - 1] = temp;
-    //         }
-    //     }
-    //     return seatIds;
-    // }
 }

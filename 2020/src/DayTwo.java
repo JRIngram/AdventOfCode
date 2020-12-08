@@ -1,7 +1,10 @@
+package technology.ingram.adventofcode.daytwo;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import technology.ingram.adventofcode.Utils;
 
 class DayTwo{
     public static void main(String args[]){
@@ -9,13 +12,13 @@ class DayTwo{
         if(!(args[0].equals("1") || args[0].equals("2"))){
             throw new IllegalArgumentException("Input must be 1 or 2. Usage:\n\tTo run challenge 1: java DayTwo 1\n\tTo run challenge 2: java DayTwo 2");
         }
-        String fileName = "input.txt";
+        String fileName = "inputs/dayTwo.txt";
         int inputLength = 1000;
         String[] inputRows = new String[inputLength];
         int answer = 0;
         int challenge = Integer.parseInt(args[0]); // 1 or 2 depending on which challenge of the day to run
 
-        inputRows = readFile(inputLength, fileName);
+        inputRows = Utils.readFile(inputLength, fileName);
         for(int i = 0; i < inputRows.length; i++){
             if(isValidPassword(inputRows[i], challenge)){
                 answer++;
@@ -25,23 +28,6 @@ class DayTwo{
         double totalTimeToRunMS = (endTime - startTime) / 1000000.0;
         System.out.println(answer);
         System.out.println("Found in: " + totalTimeToRunMS + "ms");
-    }
-
-    public static String[] readFile(int numberOfRows, String fileName){
-        String[] inputRows = new String[numberOfRows];
-        try{
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
-            int counter = 0;
-            while(counter < inputRows.length){
-                String line = br.readLine();
-                inputRows[counter] = line;
-                counter++;
-            }
-            br.close();
-        }catch(IOException err){
-            System.out.println(err);
-        }
-        return inputRows;
     }
 
     public static boolean isValidPassword(String inputRow, int challenge){

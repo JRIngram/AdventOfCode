@@ -1,11 +1,14 @@
+package technology.ingram.adventofcode.dayseven;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.ArrayList;
+import technology.ingram.adventofcode.Utils;
 
 class DaySeven{
-    private static final String inputFile = "input.txt";
+    private static final String inputFile = "inputs/DaySeven.txt";
     private static final int numberOfRows = 594;
     private static int challenge;
     public static void main(String args[]){
@@ -15,29 +18,12 @@ class DaySeven{
             throw new IllegalArgumentException("Input must be 1 or 2. Usage:\n\tTo run challenge 1: java DayThree 1\n\tTo run challenge 2: java DayThree 2");
         }
         int answer = 0;
-        String[] inputRows = readFile(numberOfRows, inputFile);
+        String[] inputRows = Utils.readFile(numberOfRows, inputFile);
         answer = challenge == 1 ? challengeOne(inputRows) : challengeTwo(inputRows);
         long endTime = System.nanoTime();
         double totalTimeToRunMS = (endTime - startTime) / 1000000.0;
         System.out.println("Answer: " + answer);
         System.out.println("Found in: " + totalTimeToRunMS + "ms");
-    }
-
-    public static String[] readFile(int numberOfRows, String fileName){
-        String[] inputRows = new String[numberOfRows];
-        try{
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
-            int counter = 0;
-            while(counter < inputRows.length){
-                String line = br.readLine();
-                inputRows[counter] = line;
-                counter++;
-            }
-            br.close();
-        }catch(IOException err){
-            System.out.println(err);
-        }
-        return inputRows;
     }
 
     public static int challengeOne(String[] inputRows){
