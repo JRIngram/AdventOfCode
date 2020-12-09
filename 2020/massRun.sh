@@ -44,3 +44,8 @@ java $package/dayeight/DayEight 1
 echo "**************";
 java $package/dayeight/DayEight 2
 echo "**************";
+printf "\nDay 9:\n";
+java $package/daynine/DayNine 1
+echo "**************";
+java $package/daynine/DayNine 2
+echo "**************";

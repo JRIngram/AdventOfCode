@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import technology.ingram.adventofcode.Utils;
 
 class DayOne{
     public static void main(String[] args)
@@ -16,42 +17,21 @@ class DayOne{
         int compositeNumber = 2020;
         BufferedReader br = null;
         String line = "";
-        int answer = 0;
-        ArrayList<Integer> smallerThanComposite = new ArrayList<Integer>();
+        ArrayList<Long> smallerThanComposite = new ArrayList<Long>();
+        String[] inputRows = Utils.readFile(200, "inputs/dayOne.txt");
 
-        try{
-            br = new BufferedReader(new FileReader("inputs/dayOne.txt"));
-        }catch(IOException err){
-            System.out.println(err);
+        for(int i = 0; i < inputRows.length; i++){
+            long parsedRow = Long.parseLong(inputRows[i]);
+            if(parsedRow < compositeNumber){
+                smallerThanComposite.add(parsedRow);
+            }
         }
 
-        do{ 
-            try{
-                line = br.readLine();
-                if(line != null){
-                    try{
-                        int parsedLine = Integer.parseInt(line);
-                        if(parsedLine < 2020){ 
-                            smallerThanComposite.add(parsedLine);
-                        }
-                    }
-                    catch(NumberFormatException err){
-                        System.out.println(err);
-                    }
-                }
-            }
-            catch(IOException err){
-                System.out.println(err);
-            }
-        }while(line != null);
-
-        answer = challenge == 1 ? findTwoSummands(smallerThanComposite, compositeNumber) : findThreeSummands(smallerThanComposite, compositeNumber);
-        try{
-            br.close();
-        }catch(IOException err){
-            System.out.println(err);
+        long[] answerSummands = challenge == 1 ? Utils.findTwoSummands(smallerThanComposite, compositeNumber) : findThreeSummands(smallerThanComposite, compositeNumber);
+        long answer = 1;
+        for(int i = 0; i < answerSummands.length; i++){
+            answer = answer * answerSummands[i];
         }
-        
         long endTime = System.nanoTime();
         double totalTimeToRunMS = (endTime - startTime) / 1000000.0;
 
@@ -65,47 +45,26 @@ class DayOne{
         System.out.println("Found in: " + totalTimeToRunMS + "ms");
     }
 
-    public static int findTwoSummands(ArrayList<Integer> numberList, int compositeNumber){
-        int answer = -1;
+    public static long[] findThreeSummands(ArrayList<Long> numberList, int compositeNumber){
+        long[] answerSummands = {0,0,0};
         for(int i = 0; i < numberList.size(); i++){
-            int summandOne = numberList.get(i);
-            int summandToFind = compositeNumber - summandOne;
-            boolean summandsFound = false;
-            if(!summandsFound){
-                for(int j = 0; j < numberList.size(); j++){
-                    if(j != i){
-                        int summandTwo = numberList.get(j);
-                        if(summandTwo == summandToFind){
-                            String resultString = "SUMMANDS ARE:" + summandOne  + ", " + summandTwo;
-                            System.out.println(resultString);
-                            answer = summandOne * summandTwo;
-                            return answer;
-                        }
-                    }
-                }
-            }
-        }
-        return answer;
-    }
-
-    public static int findThreeSummands(ArrayList<Integer> numberList, int compositeNumber){
-        int answer = -1;
-        for(int i = 0; i < numberList.size(); i++){
-            int summandOne = numberList.get(i);
+            long summandOne = numberList.get(i);
             for(int j = 0; j < numberList.size(); j++ ){
                 if(j != i){
-                    int summandTwo = numberList.get(j);
-                    int initialSum = summandOne + summandTwo;
+                    long summandTwo = numberList.get(j);
+                    long initialSum = summandOne + summandTwo;
                     if(initialSum < compositeNumber){
                         for(int k = 0; k < numberList.size(); k++){
                             if(k != i && k != j){
-                                int summandThree = numberList.get(k);
-                                int finalSum = initialSum + summandThree;
+                                long summandThree = numberList.get(k);
+                                long finalSum = initialSum + summandThree;
                                 if(finalSum == 2020){
                                     String resultString = "SUMMANDS ARE: " + summandOne + ", " + summandTwo + ", " + summandThree;
                                     System.out.println(resultString);
-                                    answer = summandOne * summandTwo * summandThree; 
-                                    return answer;
+                                    answerSummands[0] = summandOne;
+                                    answerSummands[1] = summandTwo;
+                                    answerSummands[2] = summandThree;
+                                    return answerSummands;
                                 }
                             }
                         }
@@ -113,7 +72,7 @@ class DayOne{
                 }
             }
         }
-        return -1;
+        return answerSummands;
     }
 }
 
