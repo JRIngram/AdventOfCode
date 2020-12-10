@@ -24,6 +24,33 @@ public class Utils {
         return inputRows;
     }
 
+    public static String[] readFileAndStandardiseToOneLine(int numberOfRows, String fileName){
+        ArrayList<String> inputRows = new ArrayList<String>();
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(fileName));
+            int counter = 0;
+            String inputLine = "";
+            while(counter < numberOfRows + 1){
+                String line = br.readLine();
+                if(counter == numberOfRows || line.equals("")){
+                    inputRows.add(inputLine);
+                    System.out.println(inputLine);
+                    inputLine = "";
+                }
+                else{
+                    inputLine = inputLine + line + " ";
+                }
+                counter++;
+            }
+            br.close();
+        }catch(IOException err){
+            System.out.println(err);
+        }
+        String[] inputRowsArray = new String[0];
+        inputRowsArray = inputRows.toArray(inputRowsArray);
+        return inputRowsArray;
+    }
+
     /**
      * Takes in an array of two numbers, with a target composite number and finds two values in the number list 
      * which sum to equal the composite number
