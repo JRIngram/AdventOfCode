@@ -35,11 +35,26 @@ public class DayFour {
     }
 
     public static int challengeTwo(String[] inputRows){
-        String regexPattern = "^.*(ecl:(amb|blu|brn|grn|gry|hzl|oth).*|pid:[0-9]{9}.*|eyr:(202[0-9]|2030).*|hcl:#[0-9a-f]{6}.*|byr:(19[2-9][0-9].*|200[0-2].*)|iyr:(201[0-9].*|2020).*|hgt:(1[5-8][0-9]cm|19[0-3]cm|59in|6[0-9]in|7[0-6]in).*){7}.*$";
-        Pattern regex = Pattern.compile(regexPattern);
+        String[] patterns = {
+            "^.*byr:(19[2-9][0-9]|200[0-2]);{1}.*$",
+            "^.*iyr:(201[0-9]|2020);.*$",
+            "^.*eyr:(202[0-9]|2030);.*$",
+            "^.*hgt:((1[5-8][0-9]|19[0-3])cm|(59|6[0-9]|7[0-6])in);.*$",
+            "^.*hcl:#[0-9a-f]{6};.*$",
+            "^.*ecl:(amb|blu|brn|gry|grn|hzl|oth);.*$",
+            "^.*pid:[0-9]{9};.*$",
+        };
         int answer = 0;
         for(int i = 0; i < inputRows.length; i++){
-            if(regex.matcher(inputRows[i]).matches()){
+            boolean matches = true;
+            inputRows[i] = inputRows[i].replaceAll(" ",";");
+            for(int j = 0; j < patterns.length; j++){
+                Pattern regex = Pattern.compile(patterns[j]);
+                if(!regex.matcher(inputRows[i]).matches()){
+                    matches = false;
+                }
+            }
+            if(matches){
                 answer++;
             }
         }

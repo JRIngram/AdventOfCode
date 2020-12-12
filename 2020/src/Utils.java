@@ -34,7 +34,6 @@ public class Utils {
                 String line = br.readLine();
                 if(counter == numberOfRows || line.equals("")){
                     inputRows.add(inputLine);
-                    System.out.println(inputLine);
                     inputLine = "";
                 }
                 else{
@@ -68,8 +67,6 @@ public class Utils {
                     if(j != i){
                         long summandTwo = numberList.get(j);
                         if(summandTwo == summandToFind){
-                            //String resultString = "SUMMANDS FOR " + compositeNumber + " ARE: " + summandOne  + ", " + summandTwo;
-                            //System.out.println(resultString);
                             answer[0] = summandOne;
                             answer[1] = summandTwo;
                             return answer;
@@ -77,9 +74,6 @@ public class Utils {
                     }
                 }
             }
-        }
-        if(answer[0] == 0){
-            //System.out.println("No summands could be found for " + compositeNumber);
         }
         return answer;
     }
