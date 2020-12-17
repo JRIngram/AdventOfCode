@@ -50,6 +50,26 @@ public class Utils {
         return inputRowsArray;
     }
 
+    public static Integer[] readFileAsIntegers(int numberOfRows, String fileName, boolean sort){
+        Integer[] inputRows = new Integer[numberOfRows];
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(fileName));
+            int counter = 0;
+            while(counter < inputRows.length){
+                String line = br.readLine();
+                inputRows[counter] = Integer.parseInt(line);
+                counter++;
+            }
+            br.close();
+        }catch(IOException err){
+            System.out.println(err);
+        }
+        if(sort){
+            Arrays.sort(inputRows);
+        }
+        return inputRows;
+    }
+
     /**
      * Takes in an array of two numbers, with a target composite number and finds two values in the number list 
      * which sum to equal the composite number
