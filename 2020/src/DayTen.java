@@ -1,4 +1,4 @@
-package technology.ingram.adventofcode.dayten;
+package technology.ingram.adventofcode;
 
 import technology.ingram.adventofcode.Utils;
 import java.util.HashMap;
@@ -6,27 +6,26 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DayTen {
-    private static final String inputFile = "inputs/dayTen.txt";
-    private static final int numberOfRows = 89;
-    private static int challenge;
-    private static Integer[] inputRows;
-    private static HashMap<Integer, Integer[]> challengeTwoRoutes;
-    private static int answer;
-    public static void main(String args[]){
+    private final String inputFile = "inputs/dayTen.txt";
+    private final int numberOfRows = 89;
+    private Integer[] inputRows;
+    private HashMap<Integer, Integer[]> challengeTwoRoutes;
+
+    public DayTen(){
+    }
+
+    public double runChallenge(int challenge){
         long startTime = System.nanoTime();
-        challenge = Integer.parseInt(args[0]);
-        if(!(args[0].equals("1") || args[0].equals("2"))){
-            throw new IllegalArgumentException("Input must be 1 or 2. Usage:\n\tTo run challenge 1: java DayThree 1\n\tTo run challenge 2: java DayThree 2");
-        }
         inputRows = Utils.readFileAsIntegers(numberOfRows, inputFile,true);
-        answer = challenge == 1 ? challengeOne(inputRows) : challengeTwo(inputRows);
+        int answer = challenge == 1 ? challengeOne(inputRows) : challengeTwo(inputRows);
         long endTime = System.nanoTime();
         double totalTimeToRunMS = (endTime - startTime) / 1000000.0;
         System.out.println("Answer: " + answer);
         System.out.println("Found in: " + totalTimeToRunMS + "ms");
+        return totalTimeToRunMS;
     }
 
-    public static int challengeOne(Integer[] inputRows){
+    private int challengeOne(Integer[] inputRows){
         int chosenAdapter = 0;
         int oneJoltDifferenceCount = 0;
         int threeJoltDifferenceCount = 0;
@@ -66,7 +65,7 @@ public class DayTen {
 
 
     //TODO current doesn't find correct solution.
-    public static int challengeTwo(Integer[] inputRows){
+    private int challengeTwo(Integer[] inputRows){
         challengeTwoRoutes = new HashMap<Integer, Integer[]>();
         for(int i = 0; i < inputRows.length; i++){
             ArrayList<Integer> validNextAdapters = new ArrayList<Integer>();
@@ -99,7 +98,7 @@ public class DayTen {
         return arrangementCount;
     }
 
-    public static ArrayList<Integer> calculateRoutes(HashMap<Integer, Integer[]> routes, Integer[] inputRows, int startingIndex, ArrayList<Integer> possibleRoutesCount){
+    private ArrayList<Integer> calculateRoutes(HashMap<Integer, Integer[]> routes, Integer[] inputRows, int startingIndex, ArrayList<Integer> possibleRoutesCount){
         int routesFromNode = 0;
         int currentIndex = startingIndex;
         int currentNodeValue = inputRows[currentIndex];

@@ -1,26 +1,21 @@
-package technology.ingram.adventofcode.dayfive;
+package technology.ingram.adventofcode;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Arrays;
 import technology.ingram.adventofcode.Utils;
 
 class DayFive{
-    private static final int SEATING_ROWS = 128; // Numbered 0 - 127
-    private static final int SEATING_COLUMNS = 8; // Numbered 0 - 7
-    private static final String inputFile = "inputs/dayFive.txt";
-    private static final int numberOfRows = 826;
+    private final int SEATING_ROWS = 128; // Numbered 0 - 127
+    private final int SEATING_COLUMNS = 8; // Numbered 0 - 7
+    private final String inputFile = "inputs/dayFive.txt";
+    private final int numberOfRows = 826;
 
-    public static void main(String args[]){
+    public DayFive(){
+
+    }
+
+    public double runChallenge(int challenge){
         long startTime = System.nanoTime();
-        int challenge = Integer.parseInt(args[0]);
-        if(!(args[0].equals("1") || args[0].equals("2"))){
-            throw new IllegalArgumentException("Input must be 1 or 2. Usage:\n\tTo run challenge 1: java DayThree 1\n\tTo run challenge 2: java DayThree 2");
-        }
-        String[] inputRows = new String[numberOfRows];
-        int answer = 0;
-        inputRows = Utils.readFile(numberOfRows, inputFile);
+        String[]  inputRows = Utils.readFile(numberOfRows, inputFile);
         Integer[] seatIds = new Integer[inputRows.length];
         for(int i = 0; i < inputRows.length; i++){
             int row = calculateSeatRow(inputRows[i]);
@@ -30,32 +25,39 @@ class DayFive{
         }
         Arrays.sort(seatIds);
         if(challenge == 1){
-            answer = seatIds[seatIds.length - 1];
-        }
-        if(challenge == 2){
-            for(int i = 0; i < seatIds.length; i++){
-                if(i < seatIds.length - 2){
-                    int currentSeat = seatIds[i];
-                    int nextSeat = seatIds[i + 1];
-                    int spaceBetweenIds = nextSeat - currentSeat;
-                    if(spaceBetweenIds > 1){
-                        answer = currentSeat + 1;
-                    }
-                }
-            }
-        }
-        if(challenge == 1){
+            int answer = challengeOne(seatIds);
             System.out.println("Highest ID is: " + answer);
         }
-        else{
+        if(challenge == 2){
+            int answer = challengeTwo(seatIds);
             System.out.println("FOUND MY SEAT: " + answer);
         }
         long endTime = System.nanoTime();
         double totalTimeToRunMS = (endTime - startTime) / 1000000.0;
         System.out.println("Found in: " + totalTimeToRunMS + "ms");
+        return totalTimeToRunMS;
     }
 
-    public static int calculateSeatRow(String boardingPass){
+    private int challengeOne(Integer[] inputRows){
+        return inputRows[inputRows.length - 1];
+    }
+
+    private int challengeTwo(Integer[] inputRows){
+        int answer = 0;
+        for(int i = 0; i < inputRows.length; i++){
+            if(i < inputRows.length - 2){
+                int currentSeat = inputRows[i];
+                int nextSeat = inputRows[i + 1];
+                int spaceBetweenIds = nextSeat - currentSeat;
+                if(spaceBetweenIds > 1){
+                    answer = currentSeat + 1;
+                }
+            }
+        }
+        return answer;
+    }
+
+    private int calculateSeatRow(String boardingPass){
         String[] rowKeys = boardingPass.substring(0,7).split("");
         double min = 0;
         double max = SEATING_ROWS - 1;
@@ -74,7 +76,7 @@ class DayFive{
         return row;
     }
 
-    public static int calculateSeatColumn(String boardingPass){
+    private int calculateSeatColumn(String boardingPass){
         String[] columnKeys = boardingPass.substring(7,10).split("");
         double min = 0;
         double max = SEATING_COLUMNS - 1;

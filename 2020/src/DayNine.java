@@ -1,22 +1,20 @@
-package technology.ingram.adventofcode.daynine;
+package technology.ingram.adventofcode;
 
 import technology.ingram.adventofcode.Utils;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class DayNine{
-    private static final int PREAMBLE = 25;
-    private static final String INPUT_FILE = "inputs/dayNine.txt";
-    private static final int NUMBER_OF_ROWS = 1000;
-    private static int challenge;
-    public static void main(String args[]){
-        long startTime = System.nanoTime();
-        challenge = Integer.parseInt(args[0]);
-        if(!(args[0].equals("1") || args[0].equals("2"))){
-            throw new IllegalArgumentException("Input must be 1 or 2. Usage:\n\tTo run challenge 1: java DayThree 1\n\tTo run challenge 2: java DayThree 2");
-        }
-        String[] inputRows = Utils.readFile(NUMBER_OF_ROWS, INPUT_FILE);
+    private final int PREAMBLE = 25;
+    private final String INPUT_FILE = "inputs/dayNine.txt";
+    private final int NUMBER_OF_ROWS = 1000;
 
+    public DayNine(){
+    }
+
+    public double runChallenge(int challenge){
+        long startTime = System.nanoTime();
+        String[] inputRows = Utils.readFile(NUMBER_OF_ROWS, INPUT_FILE);
         long answer = 0;
         long challengeOneAnswer = challengeOne(inputRows);
         if(challenge == 1){
@@ -29,10 +27,10 @@ public class DayNine{
         double totalTimeToRunMS = (endTime - startTime) / 1000000.0;
         System.out.println("Answer: " + answer);
         System.out.println("Found in: " + totalTimeToRunMS + "ms");
-
+        return totalTimeToRunMS;
     }
 
-    public static long challengeOne(String[] inputRows){
+    private long challengeOne(String[] inputRows){
         int counter = 0;
         ArrayList<Long> numberList = new ArrayList<Long>();
         for(int i = PREAMBLE; i < inputRows.length; i++){
@@ -52,7 +50,7 @@ public class DayNine{
         return 0;
     }
 
-    public static long challengeTwo(String[] inputRows, long numberToSumTo){
+    private long challengeTwo(String[] inputRows, long numberToSumTo){
         int counter = 0;
         ArrayList<Long> summands = new ArrayList<Long>();
         while(Long.parseLong(inputRows[counter]) < numberToSumTo){

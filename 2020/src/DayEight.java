@@ -1,4 +1,4 @@
-package technology.ingram.adventofcode.dayeight;
+package technology.ingram.adventofcode;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -9,15 +9,14 @@ import java.util.Arrays;
 import technology.ingram.adventofcode.Utils;
 
 public class DayEight {
-    private static final String inputFile = "inputs/dayEight.txt";
-    private static final int numberOfRows = 647;
-    private static int challenge;
-    public static void main(String args[]){
+    private final String inputFile = "inputs/dayEight.txt";
+    private final int numberOfRows = 647;
+    
+    public DayEight(){
+    }
+
+    public double runChallenge(int challenge){
         long startTime = System.nanoTime();
-        challenge = Integer.parseInt(args[0]);
-        if(!(args[0].equals("1") || args[0].equals("2"))){
-            throw new IllegalArgumentException("Input must be 1 or 2. Usage:\n\tTo run challenge 1: java DayThree 1\n\tTo run challenge 2: java DayThree 2");
-        }
         int answer = 0;
         String[] inputRows = Utils.readFile(numberOfRows, inputFile);
         answer = challenge == 1 ? challengeOne(inputRows) : challengeTwo(inputRows);
@@ -25,6 +24,7 @@ public class DayEight {
         double totalTimeToRunMS = (endTime - startTime) / 1000000.0;
         System.out.println("Answer: " + answer);
         System.out.println("Found in: " + totalTimeToRunMS + "ms");
+        return totalTimeToRunMS;
     }
 
     public static int challengeOne(String[] inputRows){

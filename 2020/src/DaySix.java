@@ -1,4 +1,4 @@
-package technology.ingram.adventofcode.daysix;
+package technology.ingram.adventofcode;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -10,25 +10,24 @@ import java.util.Set;
 import technology.ingram.adventofcode.Utils;
 
 class DaySix{
-    private static final String inputFile = "inputs/daySix.txt";
-    private static final int numberOfRows = 2248;
+    private final String inputFile = "inputs/daySix.txt";
+    private final int numberOfRows = 2248;
 
-    public static void main(String args[]){
+    public DaySix(){
+    }
+
+    public double runChallenge(int challenge){
         long startTime = System.nanoTime();
-        int challenge = Integer.parseInt(args[0]);
-        int answer = 0;
-        if(!(args[0].equals("1") || args[0].equals("2"))){
-            throw new IllegalArgumentException("Input must be 1 or 2. Usage:\n\tTo run challenge 1: java DayThree 1\n\tTo run challenge 2: java DayThree 2");
-        }
         String[] inputRows = Utils.readFile(numberOfRows, inputFile);
-        answer = challenge == 1 ? sumUniqueYesAnswers(inputRows) : sumAllAnsweredQuestions(inputRows);
+        int answer = challenge == 1 ? challengeOne(inputRows) : challengeTwo(inputRows);
         System.out.println("Sum of unique answers: " + answer);
         long endTime = System.nanoTime();
         double totalTimeToRunMS = (endTime - startTime) / 1000000.0;
         System.out.println("Found in: " + totalTimeToRunMS + "ms");
+        return totalTimeToRunMS;
     }
     
-    public static int sumUniqueYesAnswers(String[] inputRows){
+    public static int challengeOne(String[] inputRows){
         int answer = 0;
         String customsFormAnswers = "";
         for(int i = 0; i < inputRows.length; i++){
@@ -48,7 +47,7 @@ class DaySix{
         return answer;
     }
 
-    public static int sumAllAnsweredQuestions(String[] inputRows){
+    public static int challengeTwo(String[] inputRows){
         int answer = 0;
         String customsFormAnswers = "";
         int numberOfAnswersInGroup = 0;

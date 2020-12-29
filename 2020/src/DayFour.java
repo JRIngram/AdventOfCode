@@ -1,29 +1,30 @@
-package technology.ingram.adventofcode.dayfour;
+package technology.ingram.adventofcode;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import technology.ingram.adventofcode.Utils;
 import java.util.ArrayList;
+import technology.ingram.adventofcode.Utils;
 
 public class DayFour {
-    private static final String INPUT_FILE = "inputs/dayFour.txt";
-    private static final int NUMBER_OF_ROWS = 953;
-    private static int challenge;
-    public static void main(String args[]){
+    private final String INPUT_FILE = "inputs/dayFour.txt";
+    private final int NUMBER_OF_ROWS = 953;
+    private int challenge;
+
+    public DayFour(){
+    }
+
+    public double runChallenge(int challenge){
         long startTime = System.nanoTime();
-        challenge = Integer.parseInt(args[0]);
-        if(!(args[0].equals("1") || args[0].equals("2"))){
-            throw new IllegalArgumentException("Input must be 1 or 2. Usage:\n\tTo run challenge 1: java DayThree 1\n\tTo run challenge 2: java DayThree 2");
-        }
         String[] inputRows = Utils.readFileAndStandardiseToOneLine(NUMBER_OF_ROWS, INPUT_FILE);
         int answer = challenge == 1 ? challengeOne(inputRows) : challengeTwo(inputRows);
         long endTime = System.nanoTime();
         double totalTimeToRunMS = (endTime - startTime) / 1000000.0;
         System.out.println("Answer: " + answer);
         System.out.println("Found in: " + totalTimeToRunMS + "ms");
+        return totalTimeToRunMS;
     }
 
-    public static int challengeOne(String[] inputRows){
+    public int challengeOne(String[] inputRows){
         Pattern regex = Pattern.compile("^.*(ecl.*|pid.*|eyr.*|hcl.*|byr.*|iyr.*|hgt.*){7}.*$");
         int answer = 0;
         for(int i = 0; i < inputRows.length; i++){
@@ -34,7 +35,7 @@ public class DayFour {
         return answer;
     }
 
-    public static int challengeTwo(String[] inputRows){
+    public int challengeTwo(String[] inputRows){
         String[] patterns = {
             "^.*byr:(19[2-9][0-9]|200[0-2]);{1}.*$",
             "^.*iyr:(201[0-9]|2020);.*$",

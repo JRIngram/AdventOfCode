@@ -1,4 +1,4 @@
-package technology.ingram.adventofcode.daytwo;
+package technology.ingram.adventofcode;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
