@@ -1,34 +1,33 @@
 package technology.ingram.adventofcode;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import technology.ingram.adventofcode.Utils;
 
 class DayOne{
-    public static void main(String[] args)
+    private final String INPUT_FILE = "inputs/dayOne.txt";
+    private final int NUMBER_OF_ROWS = 200;
+    private final int COMPOSITE_NUMBER = 2020;
+
+    public DayOne(){
+
+    }
+
+    public double runChallenge(int challenge)
     {
         long startTime = System.nanoTime();
-        int challenge = Integer.parseInt(args[0]); // 1 or 2 depending on which challenge of the day to run
-        if(!(args[0].equals("1") || args[0].equals("2"))){
-            throw new IllegalArgumentException("Input must be 1 or 2. Usage:\n\tTo run challenge 1: java DayThree 1\n\tTo run challenge 2: java DayThree 2");
-        }
-        int compositeNumber = 2020;
-        BufferedReader br = null;
-        String line = "";
         ArrayList<Long> smallerThanComposite = new ArrayList<Long>();
         String[] inputRows = Utils.readFile(200, "inputs/dayOne.txt");
 
         for(int i = 0; i < inputRows.length; i++){
             long parsedRow = Long.parseLong(inputRows[i]);
-            if(parsedRow < compositeNumber){
+            if(parsedRow < COMPOSITE_NUMBER){
                 smallerThanComposite.add(parsedRow);
             }
         }
 
-        long[] answerSummands = challenge == 1 ? Utils.findTwoSummands(smallerThanComposite, compositeNumber) : findThreeSummands(smallerThanComposite, compositeNumber);
+        long[] answerSummands = challenge == 1 ? Utils.findTwoSummands(smallerThanComposite, COMPOSITE_NUMBER) : findThreeSummands(smallerThanComposite, COMPOSITE_NUMBER);
         long answer = 1;
         for(int i = 0; i < answerSummands.length; i++){
             answer = answer * answerSummands[i];
@@ -36,14 +35,9 @@ class DayOne{
         long endTime = System.nanoTime();
         double totalTimeToRunMS = (endTime - startTime) / 1000000.0;
 
-        if(answer != -1){
-            System.out.println("ELVES, HERE IS YOUR NUMBER:" + answer);
-        }
-        else{
-            System.out.println("No answer could be found");   
-        }
-
+        System.out.println("Answer: " + answer);
         System.out.println("Found in: " + totalTimeToRunMS + "ms");
+        return totalTimeToRunMS;
     }
 
     public static long[] findThreeSummands(ArrayList<Long> numberList, int compositeNumber){
@@ -60,8 +54,6 @@ class DayOne{
                                 long summandThree = numberList.get(k);
                                 long finalSum = initialSum + summandThree;
                                 if(finalSum == 2020){
-                                    String resultString = "SUMMANDS ARE: " + summandOne + ", " + summandTwo + ", " + summandThree;
-                                    System.out.println(resultString);
                                     answerSummands[0] = summandOne;
                                     answerSummands[1] = summandTwo;
                                     answerSummands[2] = summandThree;

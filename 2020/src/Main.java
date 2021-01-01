@@ -12,7 +12,21 @@ public class Main {
         if(day <= 10 && day >= 1 && (challenge == 1 || challenge == 2)){
             switch(day){
                 case 1:
+                    DayOne dayOne = new DayOne();
+                    if(challenge == 1){
+                        dayOne.runChallenge(1);
+                    }else{
+                        dayOne.runChallenge(2);
+                    }
+                    break;
                 case 2:
+                    DayTwo dayTwo = new DayTwo();
+                    if(challenge == 1){
+                        dayTwo.runChallenge(1);
+                    }else{
+                        dayTwo.runChallenge(2);
+                    }
+                    break;
                 case 3:
                     DayThree dayThree = new DayThree();
                     if(challenge == 1){

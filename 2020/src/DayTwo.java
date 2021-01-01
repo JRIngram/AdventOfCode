@@ -6,19 +6,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import technology.ingram.adventofcode.Utils;
 
-class DayTwo{
-    public static void main(String args[]){
-        long startTime = System.nanoTime();
-        if(!(args[0].equals("1") || args[0].equals("2"))){
-            throw new IllegalArgumentException("Input must be 1 or 2. Usage:\n\tTo run challenge 1: java DayTwo 1\n\tTo run challenge 2: java DayTwo 2");
-        }
-        String fileName = "inputs/dayTwo.txt";
-        int inputLength = 1000;
-        String[] inputRows = new String[inputLength];
-        int answer = 0;
-        int challenge = Integer.parseInt(args[0]); // 1 or 2 depending on which challenge of the day to run
+public class DayTwo{
+    private final String INPUT_FILE = "inputs/dayTwo.txt";
+    private final int NUMBER_OF_ROWS = 1000;
 
-        inputRows = Utils.readFile(inputLength, fileName);
+    public DayTwo(){
+    }
+
+    public double runChallenge(int challenge){
+        long startTime = System.nanoTime();
+        String[] inputRows = Utils.readFile(NUMBER_OF_ROWS, INPUT_FILE);
+        int answer = 0;
         for(int i = 0; i < inputRows.length; i++){
             if(isValidPassword(inputRows[i], challenge)){
                 answer++;
@@ -28,9 +26,10 @@ class DayTwo{
         double totalTimeToRunMS = (endTime - startTime) / 1000000.0;
         System.out.println(answer);
         System.out.println("Found in: " + totalTimeToRunMS + "ms");
+        return endTime;
     }
 
-    public static boolean isValidPassword(String inputRow, int challenge){
+    public boolean isValidPassword(String inputRow, int challenge){
         String[] splitRow = inputRow.split(" ");
         String[] rangeString = splitRow[0].split("-");
         String password = splitRow[2];
@@ -38,14 +37,25 @@ class DayTwo{
         int numberTwo = Integer.parseInt(rangeString[1]);
         String characterString = splitRow[1].replace(":", "");
         if(challenge == 1){
-            return isValidCriteriaOnePassword(numberOne, numberTwo, characterString, password);
+            return challengeOne(numberOne, numberTwo, characterString, password);
         }else if(challenge == 2){
-            return isValidCriteriaTwoPassword(numberOne, numberTwo, characterString, password);
+            return challengeTwo(numberOne, numberTwo, characterString, password);
         }
         return false;
     }
 
-    public static boolean isValidCriteriaTwoPassword(int positionOne, int positionTwo, String character, String password){
+    public boolean challengeOne(int min, int max, String character, String password ){
+        int originalLength = password.length();
+        String trimmedPassword = password.replace(character, "");
+        int trimmedLength = trimmedPassword.length();
+        int requireCharCount = originalLength - trimmedLength;
+        if(requireCharCount >= min && requireCharCount <= max){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean challengeTwo(int positionOne, int positionTwo, String character, String password){
         // (Be careful; Toboggan Corporate Policies have no concept of "index zero"!)
         char posOneCharacter = password.charAt(positionOne - 1);
         char posTwoCharacter = password.charAt(positionTwo - 1);
@@ -57,15 +67,5 @@ class DayTwo{
         return false;
     }
     
-    public static boolean isValidCriteriaOnePassword(int min, int max, String character, String password ){
-        int originalLength = password.length();
-        String trimmedPassword = password.replace(character, "");
-        int trimmedLength = trimmedPassword.length();
-        int requireCharCount = originalLength - trimmedLength;
-        if(requireCharCount >= min && requireCharCount <= max){
-            return true;
-        }
-        return false;
 
-    }
 }
