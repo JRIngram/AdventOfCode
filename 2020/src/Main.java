@@ -60,14 +60,13 @@ public class Main {
                     }
                     break;
                 case 7:
-                    // TODO 
-                    // DaySeven daySeven = new DaySeven();
-                    // if(challenge == 1){
-                    //     daySeven.runChallenge(1);
-                    // }else{
-                    //     daySeven.runChallenge(2);
-                    // }
-                    // break;
+                    DaySeven daySeven = new DaySeven();
+                    if(challenge == 1){
+                        daySeven.runChallenge(1);
+                    }else{
+                        daySeven.runChallenge(2);
+                    }
+                    break;
                 case 8: 
                     DayEight dayEight = new DayEight();
                     if(challenge == 1){

@@ -1,4 +1,4 @@
-package technology.ingram.adventofcode.dayseven;
+package technology.ingram.adventofcode;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -8,39 +8,40 @@ import java.util.ArrayList;
 import technology.ingram.adventofcode.Utils;
 
 class DaySeven{
-    private static final String inputFile = "inputs/DaySeven.txt";
-    private static final int numberOfRows = 594;
-    private static int challenge;
-    public static void main(String args[]){
+    private final String INPUT_FILE = "inputs/DaySeven.txt";
+    private final int NUMBER_OF_ROWS = 594;
+
+    DaySeven(){}
+
+    public double runChallenge(int challenge){
         long startTime = System.nanoTime();
-        challenge = Integer.parseInt(args[0]);
-        if(!(args[0].equals("1") || args[0].equals("2"))){
-            throw new IllegalArgumentException("Input must be 1 or 2. Usage:\n\tTo run challenge 1: java DayThree 1\n\tTo run challenge 2: java DayThree 2");
-        }
         int answer = 0;
-        String[] inputRows = Utils.readFile(numberOfRows, inputFile);
+        String[] inputRows = Utils.readFile(NUMBER_OF_ROWS, INPUT_FILE);
         answer = challenge == 1 ? challengeOne(inputRows) : challengeTwo(inputRows);
         long endTime = System.nanoTime();
         double totalTimeToRunMS = (endTime - startTime) / 1000000.0;
         System.out.println("Answer: " + answer);
         System.out.println("Found in: " + totalTimeToRunMS + "ms");
+        return totalTimeToRunMS;
     }
 
     public static int challengeOne(String[] inputRows){
-        String[] trimmedRows = cleanInputRows(inputRows);
-        HashMap<String, String[]> mappedBagRules = mapBagRules(trimmedRows);
+        int challenge = 1;
+        String[] trimmedRows = cleanInputRows(inputRows, challenge);
+        HashMap<String, String[]> mappedBagRules = mapBagRules(trimmedRows, challenge);
         int answer = findContainersForBag(mappedBagRules, "shiny gold", 0);
         return answer;
     }
 
     public static int challengeTwo(String[] inputRows){
-        String[] trimmedRows = cleanInputRows(inputRows);
-        HashMap<String, String[]> mappedBagRules = mapBagRules(trimmedRows);
+        int challenge = 2;
+        String[] trimmedRows = cleanInputRows(inputRows, challenge);
+        HashMap<String, String[]> mappedBagRules = mapBagRules(trimmedRows, challenge);
         int answer = findRequiredBagCount(mappedBagRules, "shiny gold", 0, 1, 0) - 1; // Minus one as we don't count the gold bag
         return answer;
     }
 
-    public static String[] cleanInputRows(String[] inputRows){
+    public static String[] cleanInputRows(String[] inputRows, int challenge){
         String[] trimmedRows = new String[inputRows.length];
         for(int i = 0; i < inputRows.length; i++){
             if(challenge == 1){
@@ -57,7 +58,7 @@ class DaySeven{
         return trimmedRows;
     }
     
-    public static HashMap<String, String[]> mapBagRules(String[] inputRows){
+    public static HashMap<String, String[]> mapBagRules(String[] inputRows, int challenge){
         return challenge == 1 ? mapBagRulesChallengeOne(inputRows) : mapBagRulesChallengeTwo(inputRows);
     }
 
@@ -122,10 +123,6 @@ class DaySeven{
         String[] bagToCheck = bagRules.get(bag);
         for(int i = 0; i < bagToCheck.length; i++){
             if(!bagToCheck[i].equals("0")){
-                String indentation = "";
-                for(int j = 0; j < depth; j++){
-                    indentation += "*";
-                }
                 String[] splitBagToCheck = bagToCheck[i].split(" ");
                 String nextbagToCheck = splitBagToCheck[1] + " " + splitBagToCheck[2];
                 answer += (multiplyer * findRequiredBagCount(bagRules, nextbagToCheck, answer, Integer.parseInt(splitBagToCheck[0]), depth + 1));
