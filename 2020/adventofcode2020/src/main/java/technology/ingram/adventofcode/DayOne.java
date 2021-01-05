@@ -1,25 +1,22 @@
 package technology.ingram.adventofcode;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import technology.ingram.adventofcode.Utils;
 
-class DayOne{
+class DayOne extends Day{
     private final String INPUT_FILE = "inputs/dayOne.txt";
     private final int NUMBER_OF_ROWS = 200;
     private final int COMPOSITE_NUMBER = 2020;
 
     public DayOne(){
-
+        super();
     }
 
-    public double runChallenge(int challenge)
+    @Override
+    public ResultsTuple runChallenge(int challenge)
     {
         long startTime = System.nanoTime();
         ArrayList<Long> smallerThanComposite = new ArrayList<Long>();
-        String[] inputRows = Utils.readFile(200, "inputs/dayOne.txt");
-
+        String[] inputRows = Utils.readFile(NUMBER_OF_ROWS, INPUT_FILE);
         for(int i = 0; i < inputRows.length; i++){
             long parsedRow = Long.parseLong(inputRows[i]);
             if(parsedRow < COMPOSITE_NUMBER){
@@ -34,10 +31,10 @@ class DayOne{
         }
         long endTime = System.nanoTime();
         double totalTimeToRunMS = (endTime - startTime) / 1000000.0;
+        ResultsTuple results = new ResultsTuple(answer, totalTimeToRunMS);
+        System.out.println("Answer: " + results.getAnswer() + "; Found in: " + results.getTimeTakenToCalculateAnswer() + "ms");
 
-        System.out.println("Answer: " + answer);
-        System.out.println("Found in: " + totalTimeToRunMS + "ms");
-        return totalTimeToRunMS;
+        return results;
     }
 
     public static long[] findThreeSummands(ArrayList<Long> numberList, int compositeNumber){
