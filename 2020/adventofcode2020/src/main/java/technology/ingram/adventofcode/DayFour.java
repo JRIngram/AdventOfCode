@@ -1,9 +1,6 @@
 package technology.ingram.adventofcode;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.ArrayList;
-import technology.ingram.adventofcode.Utils;
 
 public class DayFour {
     private final String INPUT_FILE = "inputs/dayFour.txt";
@@ -13,15 +10,15 @@ public class DayFour {
     public DayFour(){
     }
 
-    public double runChallenge(int challenge){
+    public ResultsTuple runChallenge(int challenge){
         long startTime = System.nanoTime();
         String[] inputRows = Utils.readFileAndStandardiseToOneLine(NUMBER_OF_ROWS, INPUT_FILE);
         int answer = challenge == 1 ? challengeOne(inputRows) : challengeTwo(inputRows);
         long endTime = System.nanoTime();
         double totalTimeToRunMS = (endTime - startTime) / 1000000.0;
-        System.out.println("Answer: " + answer);
-        System.out.println("Found in: " + totalTimeToRunMS + "ms");
-        return totalTimeToRunMS;
+        ResultsTuple results = new ResultsTuple(answer, totalTimeToRunMS);
+        System.out.println("Answer: " + results.getAnswer() + "; Found in: " + results.getTimeTakenToCalculateAnswer() + "ms");
+        return results;
     }
 
     public int challengeOne(String[] inputRows){

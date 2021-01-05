@@ -23,6 +23,8 @@ public class Utils {
                 counter++;
             }
             br.close();
+            isr.close();
+            is.close();
         }catch(IOException err){
             System.out.println(err);
         }
@@ -32,7 +34,10 @@ public class Utils {
     public static String[] readFileAndStandardiseToOneLine(int numberOfRows, String fileName){
         ArrayList<String> inputRows = new ArrayList<String>();
         try{
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
+            Utils utils = new Utils();
+            InputStream is = utils.getFileFromResourceAsStream(fileName);
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(isr);
             int counter = 0;
             String inputLine = "";
             while(counter < numberOfRows + 1){
