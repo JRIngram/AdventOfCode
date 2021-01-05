@@ -2,7 +2,7 @@ package technology.ingram.adventofcode;
 
 import java.util.ArrayList;
 
-class DayOne extends Day{
+public class DayOne extends Day{
     private final String INPUT_FILE = "inputs/dayOne.txt";
     private final int NUMBER_OF_ROWS = 200;
     private final int COMPOSITE_NUMBER = 2020;
@@ -33,7 +33,6 @@ class DayOne extends Day{
         double totalTimeToRunMS = (endTime - startTime) / 1000000.0;
         ResultsTuple results = new ResultsTuple(answer, totalTimeToRunMS);
         System.out.println("Answer: " + results.getAnswer() + "; Found in: " + results.getTimeTakenToCalculateAnswer() + "ms");
-
         return results;
     }
 

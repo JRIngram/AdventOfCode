@@ -1,19 +1,14 @@
 package technology.ingram.adventofcode;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import technology.ingram.adventofcode.Utils;
-
-public class DayTwo{
+public class DayTwo extends Day{
     private final String INPUT_FILE = "inputs/dayTwo.txt";
     private final int NUMBER_OF_ROWS = 1000;
 
     public DayTwo(){
+        super();
     }
 
-    public double runChallenge(int challenge){
+    public ResultsTuple runChallenge(int challenge){
         long startTime = System.nanoTime();
         String[] inputRows = Utils.readFile(NUMBER_OF_ROWS, INPUT_FILE);
         int answer = 0;
@@ -24,9 +19,9 @@ public class DayTwo{
         }
         long endTime = System.nanoTime();
         double totalTimeToRunMS = (endTime - startTime) / 1000000.0;
-        System.out.println(answer);
-        System.out.println("Found in: " + totalTimeToRunMS + "ms");
-        return endTime;
+        ResultsTuple results = new ResultsTuple(answer, totalTimeToRunMS);
+        System.out.println("Answer: " + results.getAnswer() + "; Found in: " + results.getTimeTakenToCalculateAnswer() + "ms");
+        return results;
     }
 
     public boolean isValidPassword(String inputRow, int challenge){

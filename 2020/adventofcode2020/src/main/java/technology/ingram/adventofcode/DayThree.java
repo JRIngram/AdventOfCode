@@ -1,24 +1,23 @@
 package technology.ingram.adventofcode;
 
-import technology.ingram.adventofcode.Utils;
-
-class DayThree{
+public class DayThree extends Day{
 
     public DayThree(){
+        super();
     }
 
-    public double runChallenge(int challenge){
+    public ResultsTuple runChallenge(int challenge){
         long startTime = System.nanoTime();
         String inputFile = "inputs/dayThree.txt";
         int numberOfRows = 323;
         String[] inputRows = new String[numberOfRows];
         inputRows = Utils.readFile(numberOfRows, inputFile);
         long answer = challenge == 1 ? challengeOne(inputRows) : challengeTwo(inputRows);
-        System.out.println("Answer: " + answer);
         long endTime = System.nanoTime();
         double totalTimeToRunMS = (endTime - startTime) / 1000000.0;
-        System.out.println("Found in: " + totalTimeToRunMS + "ms");
-        return totalTimeToRunMS;
+        ResultsTuple results = new ResultsTuple(answer, totalTimeToRunMS);
+        System.out.println("Answer: " + results.getAnswer() + "; Found in: " + results.getTimeTakenToCalculateAnswer() + "ms");
+        return results;
     }
 
     private int challengeOne(String[] inputRows){
