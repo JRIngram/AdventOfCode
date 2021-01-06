@@ -1,11 +1,7 @@
 package technology.ingram.adventofcode;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.ArrayList;
-import technology.ingram.adventofcode.Utils;
 
 class DaySeven{
     private final String INPUT_FILE = "inputs/DaySeven.txt";
@@ -13,16 +9,16 @@ class DaySeven{
 
     DaySeven(){}
 
-    public double runChallenge(int challenge){
+    public ResultsTuple runChallenge(int challenge){
         long startTime = System.nanoTime();
         int answer = 0;
         String[] inputRows = Utils.readFile(NUMBER_OF_ROWS, INPUT_FILE);
         answer = challenge == 1 ? challengeOne(inputRows) : challengeTwo(inputRows);
         long endTime = System.nanoTime();
         double totalTimeToRunMS = (endTime - startTime) / 1000000.0;
-        System.out.println("Answer: " + answer);
-        System.out.println("Found in: " + totalTimeToRunMS + "ms");
-        return totalTimeToRunMS;
+        ResultsTuple results = new ResultsTuple(answer, totalTimeToRunMS);
+        System.out.println("Answer: " + results.getAnswer() + "; Found in: " + results.getTimeTakenToCalculateAnswer() + "ms");
+        return results;
     }
 
     public static int challengeOne(String[] inputRows){

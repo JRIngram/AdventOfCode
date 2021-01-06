@@ -5,7 +5,6 @@ import java.util.regex.Pattern;
 public class DayFour {
     private final String INPUT_FILE = "inputs/dayFour.txt";
     private final int NUMBER_OF_ROWS = 953;
-    private int challenge;
 
     public DayFour(){
     }

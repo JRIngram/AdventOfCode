@@ -1,7 +1,6 @@
 package technology.ingram.adventofcode;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.IOException;
@@ -9,6 +8,23 @@ import java.util.Arrays;
 import java.util.ArrayList;
 
 public class Utils {
+
+    /**
+     * Returns the read file as an input stream
+     * @param fileName The name of the file to read
+     * @return The file represented as an input stream
+     */
+    private InputStream getFileFromResourceAsStream(String fileName) {
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream(fileName);
+        if (inputStream == null) {
+            throw new IllegalArgumentException("file not found! " + fileName);
+        } else {
+            return inputStream;
+        }
+
+    }
+
     public static String[] readFile(int numberOfRows, String fileName){
         String[] inputRows = new String[numberOfRows];
         try{
@@ -63,7 +79,10 @@ public class Utils {
     public static Integer[] readFileAsIntegers(int numberOfRows, String fileName, boolean sort){
         Integer[] inputRows = new Integer[numberOfRows];
         try{
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
+            Utils utils = new Utils();
+            InputStream is = utils.getFileFromResourceAsStream(fileName);
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(isr);
             int counter = 0;
             while(counter < inputRows.length){
                 String line = br.readLine();
@@ -71,6 +90,8 @@ public class Utils {
                 counter++;
             }
             br.close();
+            isr.close();
+            is.close();
         }catch(IOException err){
             System.out.println(err);
         }
@@ -106,22 +127,5 @@ public class Utils {
             }
         }
         return answer;
-    }
-
-    // get a file from the resources folder
-    // works everywhere, IDEA, unit test and JAR file.
-    private InputStream getFileFromResourceAsStream(String fileName) {
-
-        // The class loader that loaded the class
-        ClassLoader classLoader = getClass().getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream(fileName);
-
-        // the stream holding the file content
-        if (inputStream == null) {
-            throw new IllegalArgumentException("file not found! " + fileName);
-        } else {
-            return inputStream;
-        }
-
     }
 }

@@ -1,9 +1,7 @@
 package technology.ingram.adventofcode;
 
-import technology.ingram.adventofcode.Utils;
 import java.util.HashMap;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class DayTen {
     private final String inputFile = "inputs/dayTen.txt";
@@ -14,15 +12,15 @@ public class DayTen {
     public DayTen(){
     }
 
-    public double runChallenge(int challenge){
+    public ResultsTuple runChallenge(int challenge){
         long startTime = System.nanoTime();
         inputRows = Utils.readFileAsIntegers(numberOfRows, inputFile,true);
         int answer = challenge == 1 ? challengeOne(inputRows) : challengeTwo(inputRows);
         long endTime = System.nanoTime();
         double totalTimeToRunMS = (endTime - startTime) / 1000000.0;
-        System.out.println("Answer: " + answer);
-        System.out.println("Found in: " + totalTimeToRunMS + "ms");
-        return totalTimeToRunMS;
+        ResultsTuple results = new ResultsTuple(answer, totalTimeToRunMS);
+        System.out.println("Answer: " + results.getAnswer() + "; Found in: " + results.getTimeTakenToCalculateAnswer() + "ms");
+        return results;
     }
 
     private int challengeOne(Integer[] inputRows){
@@ -57,12 +55,8 @@ public class DayTen {
                 adapterString += " -> " + (chosenAdapter + 3);
             }
         }
-        System.out.println(adapterString);
-        System.out.println(oneJoltDifferenceCount);
-        System.out.println(threeJoltDifferenceCount);
         return oneJoltDifferenceCount * threeJoltDifferenceCount;
     }
-
 
     //TODO current doesn't find correct solution.
     private int challengeTwo(Integer[] inputRows){
@@ -90,30 +84,24 @@ public class DayTen {
         ArrayList<Integer> possibleRouteCount = new ArrayList<Integer>();
         possibleRouteCount = calculateRoutes(challengeTwoRoutes, inputRows, finalNodeNumber,possibleRouteCount);
         int arrangementCount = 1;
-        System.out.println("*************");
         for(int i = 0; i < possibleRouteCount.size(); i++){
-            System.out.println(possibleRouteCount.get(i));
             arrangementCount = arrangementCount * possibleRouteCount.get(i);
         }
         return arrangementCount;
     }
 
     private ArrayList<Integer> calculateRoutes(HashMap<Integer, Integer[]> routes, Integer[] inputRows, int startingIndex, ArrayList<Integer> possibleRoutesCount){
-        int routesFromNode = 0;
         int currentIndex = startingIndex;
         int currentNodeValue = inputRows[currentIndex];
         int counter = 1;
         boolean continueSearch = true;
         int routesToCurrentIndex = 0;
-        boolean hitFinalIndex = false;
-        System.out.println("CHECKING POSSIBLE ROUTES TO " + currentNodeValue);
         while(continueSearch && currentIndex > 0){
             int indexToCheck = currentIndex - counter;
             System.out.println(indexToCheck);
             if(indexToCheck > 0){
                 int difference = currentNodeValue - inputRows[indexToCheck];
                 if(difference <= 3){
-                    System.out.println("\tCan get to " + inputRows[currentIndex] + " from " + inputRows[indexToCheck]);
                     routesToCurrentIndex++;
                     counter++;
                 }
@@ -129,8 +117,6 @@ public class DayTen {
         if(routesToCurrentIndex > 0){
             possibleRoutesCount.add(routesToCurrentIndex);
         }
-        System.out.println("\t\t" + routesToCurrentIndex);
-        System.out.println("FIN RUN\n");
         if(currentIndex - 1 > -1){
             calculateRoutes(routes, inputRows, currentIndex - 1, possibleRoutesCount);
         }

@@ -1,13 +1,8 @@
 package technology.ingram.adventofcode;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Set;
-import technology.ingram.adventofcode.Utils;
 
 class DaySix{
     private final String inputFile = "inputs/daySix.txt";
@@ -16,15 +11,15 @@ class DaySix{
     public DaySix(){
     }
 
-    public double runChallenge(int challenge){
+    public ResultsTuple runChallenge(int challenge){
         long startTime = System.nanoTime();
         String[] inputRows = Utils.readFile(numberOfRows, inputFile);
         int answer = challenge == 1 ? challengeOne(inputRows) : challengeTwo(inputRows);
-        System.out.println("Sum of unique answers: " + answer);
         long endTime = System.nanoTime();
         double totalTimeToRunMS = (endTime - startTime) / 1000000.0;
-        System.out.println("Found in: " + totalTimeToRunMS + "ms");
-        return totalTimeToRunMS;
+        ResultsTuple results = new ResultsTuple(answer, totalTimeToRunMS);
+        System.out.println("Answer: " + results.getAnswer() + "; Found in: " + results.getTimeTakenToCalculateAnswer() + "ms");
+        return results;
     }
     
     public static int challengeOne(String[] inputRows){
@@ -75,10 +70,6 @@ class DaySix{
                 }
                 Set<Character> keySet = answersInGroupMap.keySet();
                 Object[] answersInGroupKeys = keySet.toArray();
-                String keySetString = "";
-                for(int j = 0; j < answersInGroupKeys.length; j++){
-                    keySetString += answersInGroupKeys[j] + ", ";
-                }
                 for(int j = 0; j < answersInGroupKeys.length; j++){
                     Character key = (char) answersInGroupKeys[j];
                     Integer answerCount = answersInGroupMap.get(key);

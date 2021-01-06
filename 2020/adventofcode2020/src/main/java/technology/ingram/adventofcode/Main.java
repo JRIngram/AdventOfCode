@@ -1,7 +1,5 @@
 package technology.ingram.adventofcode;
 
-import technology.ingram.adventofcode.*;
-
 public class Main {
     private static int day;
     private static int challenge;

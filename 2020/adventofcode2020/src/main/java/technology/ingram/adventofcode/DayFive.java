@@ -1,7 +1,6 @@
 package technology.ingram.adventofcode;
 
 import java.util.Arrays;
-import technology.ingram.adventofcode.Utils;
 
 class DayFive{
     private final int SEATING_ROWS = 128; // Numbered 0 - 127
@@ -13,7 +12,7 @@ class DayFive{
 
     }
 
-    public double runChallenge(int challenge){
+    public ResultsTuple runChallenge(int challenge){
         long startTime = System.nanoTime();
         String[]  inputRows = Utils.readFile(numberOfRows, inputFile);
         Integer[] seatIds = new Integer[inputRows.length];
@@ -24,18 +23,18 @@ class DayFive{
             seatIds[i] = seatId;
         }
         Arrays.sort(seatIds);
+        int answer = 1;
         if(challenge == 1){
-            int answer = challengeOne(seatIds);
-            System.out.println("Highest ID is: " + answer);
+            answer = challengeOne(seatIds);
         }
         if(challenge == 2){
-            int answer = challengeTwo(seatIds);
-            System.out.println("FOUND MY SEAT: " + answer);
+            answer = challengeTwo(seatIds);
         }
         long endTime = System.nanoTime();
         double totalTimeToRunMS = (endTime - startTime) / 1000000.0;
-        System.out.println("Found in: " + totalTimeToRunMS + "ms");
-        return totalTimeToRunMS;
+        ResultsTuple results = new ResultsTuple(answer, totalTimeToRunMS);
+        System.out.println("Answer: " + results.getAnswer() + "; Found in: " + results.getTimeTakenToCalculateAnswer() + "ms");
+        return results;
     }
 
     private int challengeOne(Integer[] inputRows){
