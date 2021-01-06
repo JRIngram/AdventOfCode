@@ -121,7 +121,7 @@ class DaySeven{
             if(!bagToCheck[i].equals("0")){
                 String[] splitBagToCheck = bagToCheck[i].split(" ");
                 String nextbagToCheck = splitBagToCheck[1] + " " + splitBagToCheck[2];
-                answer += (multiplyer * findRequiredBagCount(bagRules, nextbagToCheck, answer, Integer.parseInt(splitBagToCheck[0]), depth + 1));
+                answer += multiplyer * findRequiredBagCount(bagRules, nextbagToCheck, answer, Integer.parseInt(splitBagToCheck[0]), depth + 1);
             }
             else{
                 return 1 * multiplyer;

@@ -19,7 +19,7 @@ class DayFive{
         for(int i = 0; i < inputRows.length; i++){
             int row = calculateSeatRow(inputRows[i]);
             int column = calculateSeatColumn(inputRows[i]);
-            int seatId = (row * 8) + column;
+            int seatId = row * 8 + column;
             seatIds[i] = seatId;
         }
         Arrays.sort(seatIds);

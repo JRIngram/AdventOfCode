@@ -93,7 +93,7 @@ public class DayEight {
         command = command.replace("+", "");
         String[] splitCommand = command.split(" ");
         String commandInstruction = splitCommand[0];
-        int parsedCommandValue = Integer.parseInt((splitCommand[1]));
+        int parsedCommandValue = Integer.parseInt(splitCommand[1]);
         switch (commandInstruction){
             case "nop":
                 nextInstructionToRun += 1;
