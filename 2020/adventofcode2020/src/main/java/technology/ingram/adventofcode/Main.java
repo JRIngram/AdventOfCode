@@ -87,6 +87,7 @@ public class Main {
                         dayTen.runChallenge(1);
                     }
                     if(challenge == 2){
+                        System.out.println("WARNING: current returns 0, pending implementation");
                         dayTen.runChallenge(2); // TODO current gives incorrect answer;
                     }
                     break;
