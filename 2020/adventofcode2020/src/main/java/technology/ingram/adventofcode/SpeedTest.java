@@ -1,7 +1,13 @@
 package technology.ingram.adventofcode;
 
+import javax.swing.JFrame;
 import java.util.HashMap;
 import java.security.InvalidParameterException;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.plot.PlotOrientation;
 
 public class SpeedTest{
     private int numberOfRuns;
@@ -116,5 +122,31 @@ public class SpeedTest{
             }
         }
         return str;
+    }
+
+    public void showGraph(){
+        JFrame frame = new JFrame("Charts");
+        frame.setSize(600, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        String title = "Comparison of Advent of Code 2020 solution run times";
+        DefaultCategoryDataset dataSet = new DefaultCategoryDataset();  
+        for(int i = 1; i <= NUMBER_OF_DAYS; i++){
+            for(int j = 1; j <= NUMBER_OF_CHALLENGES_PER_DAY; j++){
+                String resultsKey = i + ";" + j;
+                dataSet.addValue(this.results.get(resultsKey), resultsKey, "Time (ms)");
+            }
+        }
+
+        JFreeChart barChart = ChartFactory.createBarChart(
+            title,           
+            "Category",            
+            "Score",            
+            dataSet,          
+            PlotOrientation.VERTICAL,           
+            true, true, false);
+            
+         ChartPanel chartPanel = new ChartPanel( barChart );
+         frame.getContentPane().add(chartPanel);
     }
 }

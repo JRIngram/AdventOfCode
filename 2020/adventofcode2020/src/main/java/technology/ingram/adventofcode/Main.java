@@ -11,6 +11,7 @@ public class Main {
             speedTest.testAllDays();
             System.out.println("\nRESULTS:");
             System.out.println(speedTest.toString());
+            speedTest.showGraph();
         }
         else{
             day = Integer.parseInt(args[0]);
