@@ -2,11 +2,12 @@ package technology.ingram.adventofcode;
 
 import java.util.Arrays;
 
-public class DayEight {
+public class DayEight extends Day{
     private final String inputFile = "inputs/dayEight.txt";
     private final int numberOfRows = 647;
     
     public DayEight(){
+        super();
     }
 
     public ResultsTuple runChallenge(int challenge){

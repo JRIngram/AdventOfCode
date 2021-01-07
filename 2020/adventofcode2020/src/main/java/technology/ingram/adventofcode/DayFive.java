@@ -2,14 +2,14 @@ package technology.ingram.adventofcode;
 
 import java.util.Arrays;
 
-class DayFive{
+public class DayFive extends Day{
     private final int SEATING_ROWS = 128; // Numbered 0 - 127
     private final int SEATING_COLUMNS = 8; // Numbered 0 - 7
     private final String inputFile = "inputs/dayFive.txt";
     private final int numberOfRows = 826;
 
     public DayFive(){
-
+        super();
     }
 
     public ResultsTuple runChallenge(int challenge){

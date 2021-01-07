@@ -3,11 +3,13 @@ package technology.ingram.adventofcode;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-class DaySeven{
-    private final String INPUT_FILE = "inputs/DaySeven.txt";
+public class DaySeven extends Day{
+    private final String INPUT_FILE = "inputs/daySeven.txt";
     private final int NUMBER_OF_ROWS = 594;
 
-    DaySeven(){}
+    public DaySeven(){
+        super();
+    }
 
     public ResultsTuple runChallenge(int challenge){
         long startTime = System.nanoTime();

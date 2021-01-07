@@ -4,11 +4,12 @@ import java.util.HashSet;
 import java.util.HashMap;
 import java.util.Set;
 
-class DaySix{
+public class DaySix extends Day{
     private final String inputFile = "inputs/daySix.txt";
     private final int numberOfRows = 2248;
 
     public DaySix(){
+        super();
     }
 
     public ResultsTuple runChallenge(int challenge){

@@ -19,10 +19,21 @@ Each day contains two challenges.
 | Argument       | Meaning     |  Range    |
 | :------------- | :----------: | -----------: |
 |  arg1 | Day to run  | 1 - 10    |
-| arg1   | Challenge of the chosen day to run | 1 - 2 |
+|  arg1   | Challenge of the chosen day to run | 1 - 2 |
 
-#### Example
+##### Example
 Once the project has been packaged using `mvn package`, you would like to run the second challenge of Day 5. To do this you would then run the following command: 
 `java -cp target/adventofcode2020-1.0.0.jar technology.ingram.adventofcode.Main 5 2`
+
+#### Speed Test
+If you wish to run a speed test of all the challenges:
+1. Package the project with `mvn package`
+2. Run `java -cp target/adventofcode2020-1.0.0.jar technology.ingram.adventofcode.Main speedtest <arg2>`, where `<arg2>` is the number of runs of each challenge you want to run. 
+
+##### Example
+Say you want to find the average time to run each challenge over 100 runs: once the project has been packaged using `mvn package`, you would then run the following command: 
+`java -cp target/adventofcode2020-1.0.0.jar technology.ingram.adventofcode.Main speedtest 100`
+
+
 
 

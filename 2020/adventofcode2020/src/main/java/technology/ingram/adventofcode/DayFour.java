@@ -2,11 +2,12 @@ package technology.ingram.adventofcode;
 
 import java.util.regex.Pattern;
 
-public class DayFour {
+public class DayFour extends Day{
     private final String INPUT_FILE = "inputs/dayFour.txt";
     private final int NUMBER_OF_ROWS = 953;
 
     public DayFour(){
+        super();
     }
 
     public ResultsTuple runChallenge(int challenge){

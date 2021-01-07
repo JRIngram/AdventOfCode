@@ -3,12 +3,13 @@ package technology.ingram.adventofcode;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class DayNine{
+public class DayNine extends Day{
     private final int PREAMBLE = 25;
     private final String INPUT_FILE = "inputs/dayNine.txt";
     private final int NUMBER_OF_ROWS = 1000;
 
     public DayNine(){
+        super();
     }
 
     public ResultsTuple runChallenge(int challenge){

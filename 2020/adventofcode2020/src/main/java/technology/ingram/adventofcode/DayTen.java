@@ -1,11 +1,12 @@
 package technology.ingram.adventofcode;
 
-public class DayTen {
+public class DayTen extends Day{
     private final String inputFile = "inputs/dayTen.txt";
     private final int numberOfRows = 89;
     private Integer[] inputRows;
 
     public DayTen(){
+        super();
     }
 
     public ResultsTuple runChallenge(int challenge){
