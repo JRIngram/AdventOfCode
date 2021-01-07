@@ -51,7 +51,7 @@ public class DayTen {
     }
 
     //TODO current doesn't find correct solution.
-    private int challengeTwo(Integer[] inputRows){
+    private int challengeTwo(){
         return 0;
     }
 }
