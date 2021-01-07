@@ -68,7 +68,7 @@ public class SpeedTest{
     }
 
     private void speedTestDayChallenge(int day, int challenge){
-        if((day <= NUMBER_OF_DAYS && day >= 1) && (challenge >=1 && challenge <= NUMBER_OF_CHALLENGES_PER_DAY)){
+        if(day <= NUMBER_OF_DAYS && day >= 1 && challenge >=1 && challenge <= NUMBER_OF_CHALLENGES_PER_DAY){
             Day dayToTest = selectDay(day);
             Double[] runResults = new Double[this.numberOfRuns];
             for(int i = 0; i < this.numberOfRuns; i++){
@@ -80,7 +80,7 @@ public class SpeedTest{
             results.put(resultsKey, averageRunTime);
 
         }
-        else if((day <= NUMBER_OF_DAYS && day >= 1) && (challenge >=1 && challenge <= NUMBER_OF_CHALLENGES_PER_DAY)){
+        else if(day <= NUMBER_OF_DAYS && day >= 1 && !(challenge >=1 && challenge <= NUMBER_OF_CHALLENGES_PER_DAY)){
             throw new InvalidParameterException("Challenge must be between 1 and " + NUMBER_OF_CHALLENGES_PER_DAY + " inclusive.");
         }
         else if(!(day <= 10 && day >= 1) && (challenge == 1 || challenge == 2)){
