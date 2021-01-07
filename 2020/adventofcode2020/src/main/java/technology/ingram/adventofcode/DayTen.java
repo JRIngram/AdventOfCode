@@ -11,7 +11,7 @@ public class DayTen {
     public ResultsTuple runChallenge(int challenge){
         long startTime = System.nanoTime();
         inputRows = Utils.readFileAsIntegers(numberOfRows, inputFile,true);
-        int answer = challenge == 1 ? challengeOne(inputRows) : challengeTwo(inputRows);
+        int answer = challenge == 1 ? challengeOne(inputRows) : challengeTwo();
         long endTime = System.nanoTime();
         double totalTimeToRunMS = (endTime - startTime) / 1000000.0;
         ResultsTuple results = new ResultsTuple(answer, totalTimeToRunMS);
