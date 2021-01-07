@@ -9,7 +9,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $SCRIPT_DIR/2020/adventofcode2020/
 
 echo "Running Pre-commit Maven tests..."
-mvn clean pmd:check pmd:cpd-check package
+mvn clean pmd:check pmd:cpd-check package assembly:single
 if [ $? -ne 0 ]; then
   echo "Errors found!"
   cd $CWD

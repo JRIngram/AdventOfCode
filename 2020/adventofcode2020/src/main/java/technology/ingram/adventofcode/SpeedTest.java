@@ -140,13 +140,14 @@ public class SpeedTest{
 
         JFreeChart barChart = ChartFactory.createBarChart(
             title,           
-            "Category",            
-            "Score",            
+            "Day;Challenge",            
+            "Time (ms)",            
             dataSet,          
             PlotOrientation.VERTICAL,           
             true, true, false);
             
          ChartPanel chartPanel = new ChartPanel( barChart );
          frame.getContentPane().add(chartPanel);
+         frame.pack();
     }
 }
