@@ -1,16 +1,16 @@
-from utils.readFile import read_file
 from timeit import default_timer
+from utils.readFile import read_file
 
 def one(scenario: int, input_path: str):
+    lines = read_file(input_path)
     start = default_timer()
-    lines: str = read_file(input_path)
     sum_total = 0
     for line in lines:
         if scenario == 2:
             digit_words = get_digit_word_order(line)
             for digit in digit_words:
                 line = replace_digit_word(line, digit[0])
-        
+
         digit_pair = create_digit_pair(line)
         sum_total += digit_pair
     duration = default_timer() - start
@@ -61,7 +61,7 @@ def create_digit_pair(line: str) -> int:
     return int(digit_pair)
 
 def replace_digit_word(line: str, digit_word: str):
-    # not elegant but should handle scenario where 
+    # not elegant but should handle scenario where
     # eightwo should change to 82
     replacer = ""
     if digit_word == 'zero':
@@ -87,5 +87,5 @@ def replace_digit_word(line: str, digit_word: str):
 
     if replacer != "":
         line = line.replace(digit_word, replacer)
-    
+
     return line

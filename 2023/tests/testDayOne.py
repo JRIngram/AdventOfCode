@@ -4,13 +4,13 @@ from days.one import one, replace_digit_word, create_digit_pair, get_digit_word_
 class TestDayOne(unittest.TestCase):
     def test_day_one_scenario_one(self):
         expected = 142
-        actual = one(1, "./inputs/test/dayOneScenarioOne.txt").get("solution")
+        actual = one(1, "./inputs/test/dayOne/one.txt").get("solution")
 
         self.assertEqual(actual, expected)
 
     def test_day_one_scenario_two(self):
         expected = 281
-        actual = one(2, "./inputs/test/dayOneScenarioTwo.txt").get("solution")
+        actual = one(2, "./inputs/test/dayOne/two.txt").get("solution")
 
         self.assertEqual(actual, expected)
 
