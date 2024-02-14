@@ -13,7 +13,6 @@ def five(scenario: int, input_path: str):
 
     if scenario == 1:
         seeds = seed_line
-        print(seeds)        
     elif scenario == 2:
         lowest_seed_loc = float('inf')
         seed_line_length = len(seed_line)

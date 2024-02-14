@@ -3,6 +3,7 @@ from days.two import two
 from days.three import three
 from days.four import four
 from days.five import five
+from days.six import six
 
 day = input("enter day to run: ")
 scenario = input("run scenario 1 or 2?: ")
@@ -19,6 +20,8 @@ if day_int == 4:
     result = four(int(scenario), './inputs/actual/dayFour.txt')
 if day_int == 5:
     result = five(int(scenario), './inputs/actual/dayFive.txt')
+if day_int == 6:
+    result = six(int(scenario), './inputs/actual/daySix.txt')
 
 print("#\tSolution: ", result.get("solution"))
 print("#\tTime taken: ", result.get("duration"))
